@@ -1,0 +1,110 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+        maven{ url 'https://plugins.gradle.org/m2/' }
+        maven { url 'http://repo.spring.io/snapshot' }
+        maven { url 'http://repo.spring.io/milestone' }
+        maven { url 'https://repo.spring.io/libs-snapshot' }
+        maven { url 'http://repo.spring.io/milestone' }
+    }
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.0.0.M5'
+        classpath 'org.kordamp.gradle:stats-gradle-plugin:0.1.1'
+        classpath "org.flywaydb:flyway-gradle-plugin:3.0"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'war'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.kordamp.gradle.stats'
+
+group = 'com.buzzlers.jhelpdesk'
+version = '1.0-SNAPSHOT'
+
+description = """jHelpdesk"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+configure([compileJava, compileTestJava]) {
+    options.deprecation = true
+    options.debug = true
+    options.encoding = 'utf-8'
+}
+
+repositories {
+    mavenLocal()
+    jcenter()
+    maven { url "http://repo1.maven.org/maven2" }
+    maven { url "http://ArticleRepository.jboss.org/maven2" }
+    maven { url "http://scala-tools.org/repo-releases" }
+    maven { url "http://repo.maven.apache.org/maven2" }
+    maven { url 'http://repo.spring.io/snapshot' }
+    maven { url 'http://repo.spring.io/milestone' }
+    maven { url 'https://repo.spring.io/libs-snapshot' }
+    maven { url 'http://repo.spring.io/milestone' }
+    maven { url 'https://oss.jfrog.org/libs-snapshot' }
+}
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-jdbc'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.springframework.boot:spring-boot-starter-tomcat'
+    compile 'org.springframework.boot:spring-boot-starter-mail'
+
+    compile 'org.springframework.boot:spring-boot-devtools'
+    compile 'org.apache.tomcat.embed:tomcat-embed-jasper'
+
+//    compile group: 'info.jjhop.deimos', name: 'deimos', version:'0.2'
+    compile group: 'org.pegdown', name: 'pegdown', version:'0.9.0'
+    compile group: 'org.parboiled', name: 'parboiled-java', version:'0.10.1'
+    compile group: 'javax.servlet', name: 'jstl', version:'1.2'
+    compile 'org.projectlombok:lombok'
+
+
+//    compile 'org.apache.camel:camel-core'
+//    compile 'org.apache.camel:camel-spring'
+//    compile 'org.apache.camel:camel-mail'
+
+//    compile group: 'javax.persistence', name: 'persistence-api', version:'1.0'
+//    compile group: 'org.apache.openjpa', name: 'openjpa', version:'1.2.2'
+    compile group: 'org.apache.lucene', name: 'lucene-core', version:'3.0.2'
+    compile group: 'commons-collections', name: 'commons-collections'
+    compile group: 'commons-lang', name: 'commons-lang'
+    compile group: 'commons-codec', name: 'commons-codec', version:'1.4'
+    compile group: 'commons-io', name: 'commons-io', version:'1.4'
+    compile group: 'commons-fileupload', name: 'commons-fileupload', version:'1.2.1'
+
+    compile 'org.apache.tomcat:tomcat-jdbc'
+
+    compile 'org.apache.velocity:velocity:1.6.2'
+    compile ('displaytag:displaytag:1.2') {
+        exclude group: 'org.slf4j'
+    }
+    compile 'org.postgresql:postgresql:9.3-1104-jdbc4'
+    compile 'javax.sql:jdbc-stdext:2.0'
+
+    compile("org.apache.tiles:tiles-api:3.0.5") {
+        exclude group: 'commons-logging'
+    }
+    compile("org.apache.tiles:tiles-core:3.0.5") {
+        exclude group: 'org.apache.tiles', module: 'tiles-servlet'
+        exclude group: 'commons-logging'
+    }
+    compile("org.apache.tiles:tiles-jsp:3.0.5") {
+        exclude group: 'org.apache.tiles', module: 'tiles-servlet'
+        exclude group: 'commons-logging'
+    }
+
+    compile "io.reactivex.rxjava2:rxjava:2.2.0-SNAPSHOT"
+
+    testCompile group: 'junit', name: 'junit', version:'4.5'
+    testCompile group: 'httpunit', name: 'httpunit', version:'1.7'
+    testCompile group: 'org.springframework', name: 'spring-test'
+    testCompile group: 'org.easymock', name: 'easymock', version:'2.5.2'
+}
