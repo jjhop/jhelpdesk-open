@@ -16,7 +16,7 @@ public class PagingParamsEncoder {
     private int pageSize;
 
     public PagingParamsEncoder(String tableName, String defaultColumnToSort,
-            HttpServletRequest request, int pageSize) {
+                               HttpServletRequest request, int pageSize) {
         this.columnToSort = defaultColumnToSort;
         this.request = request;
         this.pageSize = pageSize;
