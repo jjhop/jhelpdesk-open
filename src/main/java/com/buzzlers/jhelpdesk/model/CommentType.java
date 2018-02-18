@@ -1,5 +1,7 @@
 package com.buzzlers.jhelpdesk.model;
 
+import java.util.stream.Stream;
+
 public enum CommentType {
     NORMAL(0),
     REJECT(1),
@@ -20,9 +22,9 @@ public enum CommentType {
     }
 
     public static CommentType fromInt(int id) {
-        for (CommentType t : CommentType.values()) {
-            if (t.id == id) return t;
-        }
-        throw new RuntimeException("Unknowny TicketComment.CommentType");
+        return Stream.of(values())
+                .filter(ct -> ct.id == id)
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Unknowny TicketComment.CommentType"));
     }
 }
