@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,6 +24,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import static javax.persistence.CascadeType.REMOVE;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -40,8 +40,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Article implements Serializable {
-
-    private static final long serialVersionUID = 6398694944488620526L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="article_sequence")
@@ -63,7 +61,7 @@ public class Article implements Serializable {
     @Column(name = "ord")
     private Long order;
 
-    @Column(name = "title", length = 255)
+    @Column(name = "title", length = 256)
     private String title;
 
     @Column(name = "lead", length = 4096)
@@ -72,7 +70,7 @@ public class Article implements Serializable {
     @Column(name = "body", length = 16384)
     private String body;
 
-    @OneToMany(mappedBy = "article", cascade = {CascadeType.REMOVE})
+    @OneToMany(mappedBy = "article", cascade = REMOVE)
     @OrderBy(value = "createdAt")
     private List<ArticleComment> comments;
 
@@ -98,11 +96,7 @@ public class Article implements Serializable {
 
     public boolean isAssociatedWithTicket(Long ticketId) {
         assert ticketId != null;
-        for (Ticket ticket : associatedTickets) {
-            if (ticket.getTicketId().equals(ticketId)) {
-                return true;
-            }
-        }
-        return false;
+        return associatedTickets.stream()
+                .anyMatch(t -> t.getTicketId().equals(ticketId));
     }
 }
