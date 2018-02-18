@@ -2,6 +2,7 @@ package com.buzzlers.jhelpdesk.model;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.stream.Stream;
 
 public enum EventType {
 
@@ -36,20 +37,9 @@ public enum EventType {
     }
     
     public static EventType fromInt(int code) {
-        switch (code) {
-            case 1:  return CREATE;
-            case 2:  return ASSIGN;
-            case 3:  return REASSIGN;
-            case 4:  return CLOSE;
-            case 5:  return REJECT;
-            case 6:  return CATEGORYCHANGE;
-            case 7:  return PRIORITYCHANGE;
-            case 8:  return STATUSCHANGE;
-            case 9:  return COMMENTADD;
-            case 10: return ATTACHMENTADD;
-            case 11: return RESOLVE;
-            case 12: return REOPEN;
-            default: throw new RuntimeException("Unknown ticketEvent type.");
-        }
+        return Stream.of(values())
+                .filter(et -> et.code == code)
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Unknown ticketEvent type."));
     }
 }
