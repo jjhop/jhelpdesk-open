@@ -5,32 +5,20 @@ import java.util.ResourceBundle;
 
 public enum EventType {
 
-    CREATE(1, "eventType.create"), // page_add
-
-    ASSIGN(2, "eventType.assign"), // page_go
-
-    REASSIGN(3, "eventType.reassign"), // page_refresh
-
-    CLOSE(4, "eventType.close"), // page_green
-
-    REJECT(5, "eventType.reject"), // page_delete
-
-    CATEGORYCHANGE(6, "eventType.categoryChange"), // page_code
-
+    CREATE(1, "eventType.create"),                  // page_add
+    ASSIGN(2, "eventType.assign"),                  // page_go
+    REASSIGN(3, "eventType.reassign"),              // page_refresh
+    CLOSE(4, "eventType.close"),                    // page_green
+    REJECT(5, "eventType.reject"),                  // page_delete
+    CATEGORYCHANGE(6, "eventType.categoryChange"),  // page_code
     PRIORITYCHANGE(7, "eventType.priorityChange"),  // page_lightning
-
-    STATUSCHANGE(8, "eventType.statusChange"), // page_gear
-
-    RESOLVE(11, "eventType.resolve"), // ???
-    
-    REOPEN(12, "eventType.resolve"), // ???
-
-    COMMENTADD(9, "eventType.commentAdd"), // page_paintbrush
-    
-    ATTACHMENTADD(10, "eventType.attachmentAdd"); // page_attach
+    STATUSCHANGE(8, "eventType.statusChange"),      // page_gear
+    RESOLVE(11, "eventType.resolve"),               // ???
+    REOPEN(12, "eventType.resolve"),                // ???
+    COMMENTADD(9, "eventType.commentAdd"),          // page_paintbrush
+    ATTACHMENTADD(10, "eventType.attachmentAdd");   // page_attach
 
     private final int code;
-
     private final String eventNameCode;
 
     EventType(int code, String eventNameCode) {
@@ -61,7 +49,7 @@ public enum EventType {
             case 10: return ATTACHMENTADD;
             case 11: return RESOLVE;
             case 12: return REOPEN;
-            default:throw new RuntimeException("Unknown event type.");
+            default: throw new RuntimeException("Unknown ticketEvent type.");
         }
     }
 }
