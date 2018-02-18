@@ -2,8 +2,8 @@ package com.buzzlers.jhelpdesk.web.tools;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+import static org.springframework.validation.ValidationUtils.rejectIfEmptyOrWhitespace;
 
 import com.buzzlers.jhelpdesk.model.ArticleComment;
 
@@ -15,8 +15,8 @@ public class ArticleCommentValidator implements Validator {
     }
 
     public void validate(Object target, Errors errors) {
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "errors.kbase.articleCommentTitle");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "body", "errors.kbase.articleCommentBody");
+        rejectIfEmptyOrWhitespace(errors, "title", "errors.kbase.articleCommentTitle");
+        rejectIfEmptyOrWhitespace(errors, "body", "errors.kbase.articleCommentBody");
 
         // TODO: reject too long values
     }

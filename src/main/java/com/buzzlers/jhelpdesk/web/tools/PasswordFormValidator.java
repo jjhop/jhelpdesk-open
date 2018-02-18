@@ -2,8 +2,8 @@ package com.buzzlers.jhelpdesk.web.tools;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+import static org.springframework.validation.ValidationUtils.rejectIfEmptyOrWhitespace;
 
 import com.buzzlers.jhelpdesk.model.PasswordForm;
 
@@ -17,7 +17,7 @@ public class PasswordFormValidator implements Validator {
     public void validate(Object target, Errors errors) {
         PasswordForm form = (PasswordForm) target;
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "newPassword", "passw.change.new.empty");
+        rejectIfEmptyOrWhitespace(errors, "newPassword", "passw.change.new.empty");
         if (errors.hasFieldErrors("newPassword")) {
             return;
         }

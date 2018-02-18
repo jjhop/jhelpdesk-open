@@ -2,8 +2,8 @@ package com.buzzlers.jhelpdesk.web.tools;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+import static org.springframework.validation.ValidationUtils.rejectIfEmptyOrWhitespace;
 
 import com.buzzlers.jhelpdesk.model.ArticleCategory;
 
@@ -16,7 +16,7 @@ public class ArticleCategoryValidator implements Validator {
 
 	public void validate(Object command, Errors errors) {
         ArticleCategory category = (ArticleCategory) command;
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "categoryName", "errors.kbase.categoryName");
+		rejectIfEmptyOrWhitespace(errors, "categoryName", "errors.kbase.categoryName");
         if (category.getCategoryName() != null && category.getCategoryName().length() > 128) {
              errors.rejectValue("categoryName", "errors.kbase.categoryName.toolong");
         }

@@ -4,6 +4,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import static org.apache.commons.lang.StringUtils.isBlank;
+
 import com.buzzlers.jhelpdesk.model.TicketActionForm;
 import com.buzzlers.jhelpdesk.model.User;
 
@@ -20,8 +22,7 @@ public class TicketActionFormValidator implements Validator {
         if (u == null || u.isPlain() || !u.isActive()) {
             // todo: reject!
         }
-        if (form.getCommentText() == null
-                || form.getCommentText().trim().isEmpty()) {
+        if (isBlank(form.getCommentText())) {
             errors.rejectValue("commentText", "actionForm.commentText.empty");
         }
     }

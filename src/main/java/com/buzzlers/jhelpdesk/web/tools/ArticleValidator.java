@@ -2,8 +2,8 @@ package com.buzzlers.jhelpdesk.web.tools;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+import static org.springframework.validation.ValidationUtils.rejectIfEmptyOrWhitespace;
 
 import com.buzzlers.jhelpdesk.model.Article;
 
@@ -16,15 +16,15 @@ public class ArticleValidator implements Validator {
 
     public void validate(Object target, Errors errors) {
         Article article = (Article) target;
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "errors.kbase.articleTitle.empty");
+        rejectIfEmptyOrWhitespace(errors, "title", "errors.kbase.articleTitle.empty");
         if (article.getTitle() != null && article.getTitle().length() > 255) {
             errors.rejectValue("title", "errors.kbase.articleTitle.toolong");
         }
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lead", "errors.kbase.articleLead.empty");
+        rejectIfEmptyOrWhitespace(errors, "lead", "errors.kbase.articleLead.empty");
         if (article.getLead() != null && article.getLead().length() > 4096) {
             errors.rejectValue("lead", "errors.kbase.articleLead.toolong");
         }
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "body", "errors.kbase.articleBody.empty");
+        rejectIfEmptyOrWhitespace(errors, "body", "errors.kbase.articleBody.empty");
         if (article.getBody() != null && article.getBody().length() > 16384) {
             errors.rejectValue("body", "errors.kbase.articleBody.toolong");
         }
