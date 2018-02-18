@@ -32,7 +32,7 @@ public class Preferences implements Serializable {
         }};
     }
 
-	@Id
+    @Id
     @Column(name = "id")
     private Long id;
 
