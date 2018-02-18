@@ -29,7 +29,7 @@ import com.buzzlers.jhelpdesk.model.User;
 import com.buzzlers.jhelpdesk.web.search.LuceneIndexer;
 import com.buzzlers.jhelpdesk.web.search.SearchException;
 import com.buzzlers.jhelpdesk.web.tools.ArticleCommentValidator;
-import static com.buzzlers.jhelpdesk.web.commons.PagingTools.*;
+import static com.buzzlers.jhelpdesk.web.utils.PagingTools.*;
 
 @Controller
 public class KBViewController {
